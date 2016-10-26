@@ -5,6 +5,7 @@ describe ('airport', function(){
   beforeEach(function(){
     plane = new Plane();
     airport = new Airport();
+    battleMountain = new Airport(20);
 });
 
   it('should not allow take off if weather is stormy', function(){
@@ -30,4 +31,12 @@ describe ('airport', function(){
     airport.land(plane);
     expect(airport.runway).toContain(plane);
   });
+
+  it('should have default capacity of 10 if user does not define capacity', function(){
+    expect(airport.DEFAULTCAPACITY).toEqual(10);
+  });
+
+  it('should have default capacity of 20 when given by user', function(){
+    expect(battleMountain.DEFAULTCAPACITY).toEqual(20);
+  })
 });

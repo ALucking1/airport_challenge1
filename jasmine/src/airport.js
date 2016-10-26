@@ -1,11 +1,15 @@
-function Airport(){
+function Airport(capacity){
   this.runway = [];
+  this.DEFAULTCAPACITY = (typeof capacity !== 'undefined') ?  capacity : 10;
 };
 
 Airport.prototype.viewRunway = function(){
   return this.runway;
 };
 
+Airport.prototype.viewDEFAULTCAPACITY = function(){
+  return this.DEFAULTCAPACITY;
+};
 
 Airport.prototype.land = function(plane){
   if(this.isStormy()) {throw new Error("Weather is too stormy to land");};
@@ -20,7 +24,7 @@ Airport.prototype.takeOff = function(plane) {
 
 Airport.prototype.isStormy = function() {
   var weather = new Weather;
-  if(weather == "stormy"){
+  if(weather.currentWeather() == "stormy"){
     return true;
   } else {
     return false;
