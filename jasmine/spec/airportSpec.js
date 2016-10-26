@@ -1,6 +1,7 @@
 describe ('airport', function(){
   var airport;
   var plane;
+  var battleMountain;
 
   beforeEach(function(){
     plane = new Plane();
@@ -15,8 +16,8 @@ describe ('airport', function(){
   });
 
   it('should allow take off if weather is sunny', function(){
-    airport.land(plane);
     spyOn(airport, 'isStormy').and.returnValue(false);
+    airport.land(plane);
     airport.takeOff(plane);
     expect(airport.runway).not.toContain(plane);
   });
@@ -38,5 +39,17 @@ describe ('airport', function(){
 
   it('should have default capacity of 20 when given by user', function(){
     expect(battleMountain.DEFAULTCAPACITY).toEqual(20);
-  })
-});
+  });
+
+  it('should prevent landing if airport is at capacity', function(){
+    spyOn(airport, 'isStormy').and.returnValue(false);
+    for(var i=1; i<=battleMountain.DEFAULTCAPACITY; i++){
+      battleMountain.land(new Plane());
+    };
+    expect(function(){battleMountain.land(plane);}).toThrowError("Airport is at capacity");
+    });
+
+    // it('should create random stormy status', function(){
+    //   expect(airport.isStormy()).toEqual(true);
+    // });
+  });

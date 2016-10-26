@@ -12,6 +12,7 @@ Airport.prototype.viewDEFAULTCAPACITY = function(){
 };
 
 Airport.prototype.land = function(plane){
+  // console.log(this.isStormy());
   if(this.isStormy()) {throw new Error("Weather is too stormy to land");};
   this.runway.push(plane);
 };
@@ -23,7 +24,7 @@ Airport.prototype.takeOff = function(plane) {
 };
 
 Airport.prototype.isStormy = function() {
-  var weather = new Weather;
+  var weather = new Weather();
   if(weather.currentWeather() == "stormy"){
     return true;
   } else {
